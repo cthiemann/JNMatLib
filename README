@@ -1,0 +1,31 @@
+This is the Java interface to Matlab's libmat and libmx.
+
+To compile, open a Terminal and type
+  ant
+
+To use this with the SPaTo_Visual_Explorer, you must copy
+the updated jnmatlib.jar from dist/ to the code folder
+in the SPaTo_Visual_Explorer sketch. The jna.jar from lib/
+must also be copied to the code folder, but probably
+is already there.
+
+The native libraries (.dll for Windows, .so for Linux, and
+.dylib for Mac) in both 32-bit and 64-bit are in the lib
+folder (Windows still missing...).  Besides libmat and libmx,
+there are a bunch of libraries those two depend on and a
+ICU dat file that contains 11 MB of probably useless stuff.
+
+Unfortunately, some of the libraries don't tell they rely
+on other libraries but rather try to load them themselves.
+That has the ugly side effect, that an environment
+variable has to be set to point to the library path
+when running a Java program that uses jnmatlib.
+This variable is PATH on Windows, LD_LIBRARY_PATH on Linux,
+and DYLD_LIBRARY_PATH on Mac.  Multiple paths can be
+specified in the environment variable, and if both the
+32-bit and 64-bit versions are accessible via the path
+variable, the correct version will be loaded (on Mac at
+least).  In principle, it might be possible, to spawn
+a new process from within Java that runs with the modified
+environment variable.  This has to be implemented by the
+program using jnmatlib.

@@ -1,0 +1,17 @@
+libmat.dylib
+libut.dylib
+libicudata.dylib.40
+libicuuc.dylib.40
+libicui18n.dylib.40
+libicuio.dylib.40
+libmx.dylib
+libmwfl.dylib
+libboost_thread-xgcc40-mt-1_36.dylib
+libboost_signals-xgcc40-mt-1_36.dylib
+libboost_system-xgcc40-mt-1_36.dylib
+libboost_filesystem-xgcc40-mt-1_36.dylib
+libhdf5_hl.6.dylib
+libhdf5.6.dylib
+libtbb.dylib
+libtbbmalloc.dylib
+icudt40l.dat
