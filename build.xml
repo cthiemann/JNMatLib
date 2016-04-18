@@ -1,6 +1,7 @@
 <?xml version="1.0" ?>
 <project name="jnmatlib" default="jarfile">
 
+  <property name="project.version" value="0.0.1"/>
   <property name="src" value="src" />
   <property name="build" value="build" />
   <property name="doc" value="doc" />
@@ -27,19 +28,19 @@
 
   <target name="jarfile" depends="classes">
     <mkdir dir="${dist}" />
-    <jar jarfile="${dist}/${ant.project.name}.jar" basedir="${build}" />
+    <jar jarfile="${dist}/${ant.project.name}-${project.version}.jar" basedir="${build}" />
   </target>
 
 
   <target name="classes.test"><!-- depends="classes">-->
-    <javac srcdir="test" destdir="test" classpath="${classpath}:lib/junit.jar:${dist}/${ant.project.name}.jar" />
+    <javac srcdir="test" destdir="test" classpath="${classpath}:lib/junit.jar:${dist}/${ant.project.name}-${project.version}.jar" />
   </target>
   
   <target name="test" depends="classes.test"><!-- depends="classes">-->
     <junit fork="yes" dir="test">
       <classpath>
         <pathelement path="${classpath}" />
-        <pathelement location="${dist}/${ant.project.name}.jar" />
+        <pathelement location="${dist}/${ant.project.name}-${project.version}.jar" />
         <pathelement location="lib/junit.jar" />
         <pathelement location="test" />
       </classpath>
