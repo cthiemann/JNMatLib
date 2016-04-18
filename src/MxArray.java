@@ -356,6 +356,74 @@ public class MxArray extends MxArrayInfo {
    * If this array is of type <code>logical</code>, the returned
    * values are either 1 or 0.
    *
+   * @see #doubleMatrix
+   */
+  public double[] doubleVector() {
+    Object vector = getData();
+    if (vector.getClass().getComponentType().getComponentType() == Float.TYPE)
+      return (double[])vector;
+    else {
+      int length = (int)getNumberOfElements();
+      double res[] = new double[length];
+      for (int i = 0; i < length; i++) {
+        res[i] = ((Number)Array.get(vector, i)).doubleValue();  // FIXME: can we prevent the detour over Number?
+      }
+      return res;
+    }
+  }
+
+
+  /**
+   * Returns the values in this array as a 2-D array of doubles.
+   * If this array is of type <code>logical</code>, the returned
+   * values are either 1 or 0.
+   *
+   * @see #getDataAsMatrix
+   */
+  public double[][] doubleMatrix() {
+    Object matrix = getDataAsMatrix();
+    if (matrix.getClass().getComponentType().getComponentType() == Double.TYPE)
+      return (double[][])matrix;
+    else {
+      int Nr = MxLibrary.mxGetM(this).intValue(), Nc = MxLibrary.mxGetN(this).intValue();  // FIXME: handle overflow
+      double res[][] = new double[Nr][Nc];
+      for (int i = 0; i < Nr; i++) {
+        Object row = Array.get(matrix, i);
+        for (int j = 0; j < Nc; j++)
+          res[i][j] = ((Number)Array.get(row, j)).doubleValue();  // FIXME: can we prevent the detour over Number?
+      }
+      return res;
+    }
+  }
+
+
+  /**
+   * Returns the values in this array as a 2-D array of floats.
+   * If this array is of type <code>logical</code>, the returned
+   * values are either 1 or 0.
+   *
+   * @see #floatMatrix
+   */
+  public float[] floatVector() {
+    Object vector = getData();
+    if (vector.getClass().getComponentType().getComponentType() == Float.TYPE)
+      return (float[])vector;
+    else {
+      int length = (int)getNumberOfElements();
+      float res[] = new float[length];
+      for (int i = 0; i < length; i++) {
+        res[i] = ((Number)Array.get(vector, i)).floatValue();  // FIXME: can we prevent the detour over Number?
+      }
+      return res;
+    }
+  }
+
+
+  /**
+   * Returns the values in this array as a 2-D array of floats.
+   * If this array is of type <code>logical</code>, the returned
+   * values are either 1 or 0.
+   *
    * @see #getDataAsMatrix
    */
   public float[][] floatMatrix() {
