@@ -1,3 +1,6 @@
 build/
 dist/
 doc/
+*.class
+.*.swp
+*.db
