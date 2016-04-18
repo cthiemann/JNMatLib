@@ -6,10 +6,13 @@
   <property name="doc" value="doc" />
   <property name="dist" value="dist" />
   <property name="classpath" value="lib/jna.jar" />
-  <property name="ant.build.javac.source" value="1.5" />
-  <property name="ant.build.javac.target" value="1.5" />
+  <!--
+    <property name="ant.build.javac.source" value="1.5" />
+    <property name="ant.build.javac.target" value="1.5" />
+  -->
 
   <target name="classes">
+    <mkdir dir="${build}" />
     <javac srcdir="${src}" destdir="${build}" classpath="${classpath}" />
     <delete><fileset dir="test" includes="*.class" /></delete>
   </target>
