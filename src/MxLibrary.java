@@ -91,8 +91,8 @@ public class MxLibrary {
   public static native String mxArrayToString(MxArray array_ptr);  // FIXME: multibyte characters? returns char*
   //public static native void mxAssert(int expr, String error_message);
   //public static native void mxAssertS(int expr, String error_message);
-  private static native NativeLong mxCalcSingleSubscript_730(MxArrayInfo pm, NativeLong nsubs, NativeLongArray subs);
-    public static NativeLong mxCalcSingleSubscript(MxArrayInfo pm, NativeLong nsubs, NativeLongArray subs) {
+  private static native NativeLong mxCalcSingleSubscript_730(MxArrayInfo pm, long nsubs, long[] subs);
+    public static NativeLong mxCalcSingleSubscript(MxArrayInfo pm, long nsubs, long[] subs) {
       return mxCalcSingleSubscript_730(pm, nsubs, subs); }
   public static native Pointer mxCalloc(NativeLong n, NativeLong size);
   // typedef char16_t mxChar -> FIXME: ???

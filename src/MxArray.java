@@ -72,8 +72,8 @@ public class MxArray extends MxArrayInfo {
     return MxLibrary.mxIsLogicalScalarTrue(this);
   }
   
-  public Number getValueAt(int... subs) {
-    long index = MxLibrary.mxCalcSingleSubscript(this, new NativeLong(subs.length), new NativeLongArray(subs)).longValue();
+  public Number getValueAt(long... subs) {
+    long index = MxLibrary.mxCalcSingleSubscript(this, subs.length, subs).longValue();
     if (MxLibrary.mxIsLogical(this)) {
       return MxLibrary.mxGetLogicals(this).getByte(index*1);
     }
@@ -95,21 +95,21 @@ public class MxArray extends MxArrayInfo {
         throw new MatLibException("cannot handle data class " + getClassID() + " (" + getClassName() + ")");
     }
   }
-  
+
   public boolean booleanValue() { return booleanValue(0); }
-  public boolean booleanValue(int... subs) { return getValueAt(subs).byteValue() != 0; }
+  public boolean booleanValue(long... subs) { return getValueAt(subs).byteValue() != 0; }
   public byte byteValue() { return byteValue(0); }
-  public byte byteValue(int... subs) { return getValueAt(subs).byteValue(); }
+  public byte byteValue(long... subs) { return getValueAt(subs).byteValue(); }
   public short shortValue() { return shortValue(0); }
-  public short shortValue(int... subs) { return getValueAt(subs).shortValue(); }
+  public short shortValue(long... subs) { return getValueAt(subs).shortValue(); }
   public int intValue() { return intValue(0); }
-  public int intValue(int... subs) { return getValueAt(subs).intValue(); }
+  public int intValue(long... subs) { return getValueAt(subs).intValue(); }
   public long longValue() { return longValue(0); }
-  public long longValue(int... subs) { return getValueAt(subs).longValue(); }
+  public long longValue(long... subs) { return getValueAt(subs).longValue(); }
   public float floatValue() { return floatValue(0); }
-  public float floatValue(int... subs) { return getValueAt(subs).floatValue(); }
+  public float floatValue(long... subs) { return getValueAt(subs).floatValue(); }
   public double doubleValue() { return doubleValue(0); }
-  public double doubleValue(int... subs) { return getValueAt(subs).doubleValue(); }
+  public double doubleValue(long... subs) { return getValueAt(subs).doubleValue(); }
   
 
   /**
@@ -443,10 +443,10 @@ public class MxArray extends MxArrayInfo {
   }
   
 
-  public MxArray getCell(int... subs) {
+  public MxArray getCell(long... subs) {
     if (!MxLibrary.isLoaded())
       throw new MatLibException("MxLibrary (libmx) not loaded", MxLibrary.getError());
-    long index = MxLibrary.mxCalcSingleSubscript(this, new NativeLong(subs.length), new NativeLongArray(subs)).longValue();
+    long index = MxLibrary.mxCalcSingleSubscript(this, subs.length, subs).longValue();
     return MxLibrary.mxGetCell(this, new NativeLong(index));
   }
 
@@ -455,16 +455,16 @@ public class MxArray extends MxArrayInfo {
       throw new MatLibException("MxLibrary (libmx) not loaded", MxLibrary.getError());
     return MxLibrary.mxGetField(this, new NativeLong(0), fieldname);
   }
-  public MxArray getField(String fieldname, int... subs) {
+  public MxArray getField(String fieldname, long... subs) {
     if (!MxLibrary.isLoaded())
       throw new MatLibException("MxLibrary (libmx) not loaded", MxLibrary.getError());
-    long index = MxLibrary.mxCalcSingleSubscript(this, new NativeLong(subs.length), new NativeLongArray(subs)).longValue();
+    long index = MxLibrary.mxCalcSingleSubscript(this, subs.length, subs).longValue();
     return MxLibrary.mxGetField(this, new NativeLong(index), fieldname);
   }
-  public MxArray getFieldByNumber(int fieldnumber, int... subs) {
+  public MxArray getFieldByNumber(int fieldnumber, long... subs) {
     if (!MxLibrary.isLoaded())
       throw new MatLibException("MxLibrary (libmx) not loaded", MxLibrary.getError());
-    long index = MxLibrary.mxCalcSingleSubscript(this, new NativeLong(subs.length), new NativeLongArray(subs)).longValue();
+    long index = MxLibrary.mxCalcSingleSubscript(this, subs.length, subs).longValue();
     return MxLibrary.mxGetFieldByNumber(this, new NativeLong(index), fieldnumber);
   }
 
