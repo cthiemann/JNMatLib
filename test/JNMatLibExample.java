@@ -93,7 +93,8 @@ public class JNMatLibExample {
     InspectMxArray(vCellEntry);
     double[] vCellDoubleData = vCellEntry.doubleVector();
 
-    for (int vCellIdx = 0; vCellIdx < vCellDoubleData.length; ++vCellIdx) {
+    System.out.println("Printing first " + Math.min(8, vCellDoubleData.length) + " values of MxArray:");
+    for (int vCellIdx = 0; vCellIdx < Math.min(8, vCellDoubleData.length); ++vCellIdx) {
       System.out.println(vCellIdx + ": " + vCellDoubleData[vCellIdx]);
     }
   }
