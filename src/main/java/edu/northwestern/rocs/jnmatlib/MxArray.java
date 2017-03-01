@@ -498,7 +498,7 @@ public class MxArray extends MxArrayInfo {
   
   
   /** Overrides {@link MxArrayInfo#finalize} as to not destroy the native
-   * <code>struct MxArray</struct> automatically when this instance is gc'd. */
+   * <code>struct MxArray</code> automatically when this instance is gc'd. */
   protected void finalize() { }
 
 }

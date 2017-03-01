@@ -1,6 +1,12 @@
-build/
-dist/
-doc/
 *.class
 .*.swp
 *.db
+*.class
+.*.swp
+*.db
+.gradle
+.gradletasknamecache
+build/
+dist/
+doc/
+gradle-app.setting

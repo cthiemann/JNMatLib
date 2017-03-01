@@ -2,15 +2,13 @@
 <project name="jnmatlib" default="jarfile">
 
   <property name="project.version" value="0.0.1"/>
-  <property name="src" value="src" />
+  <property name="src" value="src/main/java/edu/northwestern/rocs/jnmatlib" />
   <property name="build" value="build" />
   <property name="doc" value="doc" />
   <property name="dist" value="dist" />
   <property name="classpath" value="lib/jna-4.2.2.jar" />
-  <!--
-    <property name="ant.build.javac.source" value="1.5" />
-    <property name="ant.build.javac.target" value="1.5" />
-  -->
+  <property name="ant.build.javac.source" value="1.7" />
+  <property name="ant.build.javac.target" value="1.7" />
 
   <target name="classes">
     <mkdir dir="${build}" />
@@ -22,7 +20,7 @@
     <javadoc destdir="${doc}" classpath="lib/jna-4.2.2.jar">
       <fileset dir="${src}"><include name="**/*.java" /></fileset>
       <link href="https://jna.dev.java.net/nonav/javadoc" />
-      <link href="http://java.sun.com/javase/6/docs/api" />
+      <link href="http://docs.oracle.com/javase/7/docs/api" />
     </javadoc>
   </target>
 
