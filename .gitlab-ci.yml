@@ -1,0 +1,39 @@
+stages:
+  - build
+
+ubuntu:16.04:
+  image: docker.biodataanalysis.de:22066/ubuntu/bda_cppdev_iadev_jdk8:16.04
+  tags:
+   - ubuntu16
+   - linux
+   - docker
+  stage: build
+  script: ./gradlew build install
+
+ubuntu:14.04:
+  image: docker.biodataanalysis.de:22066/ubuntu/bda_cppdev_iadev_jdk8:14.04
+  tags:
+   - ubuntu14
+   - linux
+   - docker
+  stage: build
+  script: ./gradlew build install
+
+centos:6.8:
+  image: docker.biodataanalysis.de:22066/centos/bda_bc2cppdev_iadev_jdk8:6.8
+  tags:
+   - centos
+   - linux
+   - docker
+  stage: build
+  script: ./gradlew build install
+
+centos:7.3.1611:
+  image: docker.biodataanalysis.de:22066/centos/bda_cppdev_iadev_jdk8:7.3.1611
+  tags:
+   - centos
+   - linux
+   - docker
+  stage: build
+  script: ./gradlew build install
+

@@ -1,42 +1,44 @@
 <?xml version="1.0" ?>
 <project name="jnmatlib" default="jarfile">
 
-  <property name="src" value="src" />
+  <property name="project.version" value="0.0.1"/>
+  <property name="src" value="src/main/java/edu/northwestern/rocs/jnmatlib" />
   <property name="build" value="build" />
   <property name="doc" value="doc" />
   <property name="dist" value="dist" />
-  <property name="classpath" value="lib/jna.jar" />
-  <property name="ant.build.javac.source" value="1.5" />
-  <property name="ant.build.javac.target" value="1.5" />
+  <property name="classpath" value="lib/jna-4.2.2.jar" />
+  <property name="ant.build.javac.source" value="1.7" />
+  <property name="ant.build.javac.target" value="1.7" />
 
   <target name="classes">
+    <mkdir dir="${build}" />
     <javac srcdir="${src}" destdir="${build}" classpath="${classpath}" />
     <delete><fileset dir="test" includes="*.class" /></delete>
   </target>
 
   <target name="javadoc">
-    <javadoc destdir="${doc}" classpath="lib/jna.jar">
+    <javadoc destdir="${doc}" classpath="lib/jna-4.2.2.jar">
       <fileset dir="${src}"><include name="**/*.java" /></fileset>
       <link href="https://jna.dev.java.net/nonav/javadoc" />
-      <link href="http://java.sun.com/javase/6/docs/api" />
+      <link href="http://docs.oracle.com/javase/7/docs/api" />
     </javadoc>
   </target>
 
   <target name="jarfile" depends="classes">
     <mkdir dir="${dist}" />
-    <jar jarfile="${dist}/${ant.project.name}.jar" basedir="${build}" />
+    <jar jarfile="${dist}/${ant.project.name}-${project.version}.jar" basedir="${build}" />
   </target>
 
 
   <target name="classes.test"><!-- depends="classes">-->
-    <javac srcdir="test" destdir="test" classpath="${classpath}:lib/junit.jar:${dist}/${ant.project.name}.jar" />
+    <javac srcdir="test" destdir="test" classpath="${classpath}:lib/junit.jar:${dist}/${ant.project.name}-${project.version}.jar" />
   </target>
   
   <target name="test" depends="classes.test"><!-- depends="classes">-->
     <junit fork="yes" dir="test">
       <classpath>
         <pathelement path="${classpath}" />
-        <pathelement location="${dist}/${ant.project.name}.jar" />
+        <pathelement location="${dist}/${ant.project.name}-${project.version}.jar" />
         <pathelement location="lib/junit.jar" />
         <pathelement location="test" />
       </classpath>

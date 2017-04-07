@@ -1,7 +1,13 @@
-This is the Java interface to Matlab's libmat and libmx.
+This is a Java interface to Matlab's libmat and libmx.
 
 To compile, open a Terminal and type
   ant
+
+To compile the tests, go to the directory test and type
+  make
+
+To run the tests, go to the directory test and type
+  make test
 
 To use this with the SPaTo_Visual_Explorer, you must copy
 the updated jnmatlib.jar from dist/ to the code folder

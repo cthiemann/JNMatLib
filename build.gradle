@@ -1,0 +1,67 @@
+
+apply plugin: 'java'
+apply plugin: 'distribution'
+
+group 'edu.northwestern.rocs.jnmatlib'
+version '0.0.1'
+
+sourceCompatibility = 1.7
+targetCompatibility = 1.7
+
+//libsDir = new File("dist")
+
+repositories {
+    mavenCentral()
+    mavenLocal()
+}
+
+dependencies {
+    // Matlab file access:
+    compile group: 'net.java.dev.jna', name: 'jna', version: '4.2.2'
+    //compile group: 'net.java.dev.jna', name: 'jna', version: '4.3.0'
+
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+}
+
+javadoc {
+  destinationDir = new File("doc")
+  options { 
+    links "http://docs.oracle.com/javase/7/docs/api/" 
+  }
+}
+
+jar {
+    manifest {
+        def buildTime = new Date().format('yyyyMMddHHmmss')
+        attributes('Implementation-Title': 'jnmatlib',
+                   'Implementation-Version': version,
+                   'Build-Timestamp': buildTime)
+    }
+    baseName 'jnmatlib'
+}
+
+task distDir {
+  doLast {
+    mkdir('dist')
+  }
+}
+
+task copyJarToDist(dependsOn: distDir, type: Copy) {
+  // shortcut for createJar.outputs.files
+  from jar
+  into "dist"
+}
+
+build.finalizedBy(copyJarToDist)
+
+task install(type: Copy) {
+    from 'build/libs/'
+    into System.getenv('BEESOFTDEST') + '/thirdparty/lib'
+}
+
+distributions {
+    main {
+        baseName = 'jnmatlib'
+    }
+}
+

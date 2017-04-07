@@ -90,6 +90,8 @@ public class MatFile extends PointerType {
       throw new NullPointerException("filename cannot be null");
     if (mode == null)
       throw new NullPointerException("mode cannot be null");
+    if (filename.isEmpty())
+      throw new NullPointerException("filename cannot be empty");
     if (!MatLibrary.isLoaded())
       throw new MatLibException("MatLibrary (libmat) not loaded", MatLibrary.getError());
     MatFile mf = MatLibrary.matOpen(filename, mode);
@@ -201,8 +203,18 @@ public class MatFile extends PointerType {
       throw new MatLibException("matClose returned non-zero value");
   }
   
+  // FIXME: This finalize() gets repeatedly called when the Java
+  // code is repeatedly executed. This can cause crashes in
+  // MatLibrary.matClose() which seems to crash in libmat.so. If
+  // the user carefully closes their Matlab file, we should not
+  // have problems even without this finalize. What to do?
   public void finalize() {
-    try { close(); super.finalize(); } catch (Throwable t) { /* never mind... */ }
+    try {
+      close();
+      super.finalize();
+    } catch (Throwable t) {
+      // never mind...
+    }
   }
   
 }
